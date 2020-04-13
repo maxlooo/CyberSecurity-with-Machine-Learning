@@ -59,5 +59,6 @@ def main():
         print("Transaction is OK")
     print("Probability score: {}".format(classifier.predict_proba([transaction])))
 
+# Use only if called through this program, do not allow import use
 if __name__ == '__main__':
     main()
