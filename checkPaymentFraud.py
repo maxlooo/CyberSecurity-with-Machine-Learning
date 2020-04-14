@@ -1,7 +1,7 @@
 '''
 
 Payment Data is obtained from:
-https://raw.githubusercontent.com/oreilly-mlsec/book-resources/master/chapter2/datasets/payment_fraud.csv
+https://github.com/oreilly-mlsec/book-resources/blob/master/chapter2/datasets/payment_fraud.csv
 
 '''
 import numpy as np
