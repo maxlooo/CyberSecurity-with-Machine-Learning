@@ -25,7 +25,7 @@ def process_event(user, recent_history):
 	recent_history[user].append(cur_time)
 	for x in recent_history[user]:
 		if cur_time - x < anomaly_window_seconds:
-			print()
+			continue
 	print(x, " ", recent_history[user])
 	return recent_history
 
