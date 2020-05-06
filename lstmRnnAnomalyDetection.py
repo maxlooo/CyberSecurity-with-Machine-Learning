@@ -6,10 +6,13 @@ import matplotlib.pyplot as plt
 import time
 
 from keras.models import Sequential
+from keras.utils import plot_model
 from keras.layers.recurrent import LSTM
 from keras.layers.core import Dense, Activation, Dropout
 
-epochs = 3
+from google.colab import files
+
+epochs = 5
 batch_size = 50
 # Each training data point will be length 100-1,
 # since the last value in each sequence is the label
@@ -38,11 +41,11 @@ downloaded.GetContentFile('cpu-full-b.csv')
 # print('Downloaded content "{}"'.format(downloaded.GetContentString()))
 
 def normalize(result):
-    result_mean = result.mean()
-    result_std = result.std()
-    result -= result_mean
-    result /= result_std
-    return result, result_mean
+	result_mean = result.mean()
+	result_std = result.std()
+	result -= result_mean
+	result /= result_std
+	return result, result_mean
 
 global_start_time = time.time()
 
@@ -50,9 +53,8 @@ print('Loading data... ')
 data_b = pd.read_csv('cpu-full-b.csv', parse_dates=[0], infer_datetime_format=True)
 data = data_b['cpu'].to_numpy()  # as_matrix() doesn't work
 
-# train on first 500 samples and test on last 210 samples, 
-# 100 of which overlaps with training (test set has anomaly)
-# data length is 660 with sequence length 50
+# train on first 600 samples and test on last 260 samples, 
+# 200 of which overlaps with training (test set has anomaly)
 train_start, train_end, test_start, test_end = 0, 550, 400, 660
 print("Length of Data", len(data))
 
@@ -61,7 +63,7 @@ print("Creating training data...")
 
 result = []
 for index in range(train_start, train_end - sequence_length):
-    result.append(data[index: index + sequence_length])
+	result.append(data[index: index + sequence_length])
 result = np.array(result)
 result, result_mean = normalize(result)
 
@@ -77,7 +79,7 @@ print("Creating test data...")
 
 result = []
 for index in range(test_start, test_end - sequence_length):
-    result.append(data[index: index + sequence_length])
+	result.append(data[index: index + sequence_length])
 result = np.array(result)
 result, result_mean = normalize(result)
 
@@ -108,6 +110,9 @@ model.add(Dropout(0.2))
 # Densely-connected output layer with the linear activation function
 model.add(Dense(units=1))
 model.add(Activation('linear'))
+model.summary()
+plot_model(model, to_file='lstmRnnGraph1.pdf')
+files.download("lstmRnnGraph1.pdf") 
 
 model.compile(loss='mean_squared_error', optimizer='adam')
 
@@ -123,5 +128,7 @@ plt.plot(y_test[:len(y_test)], 'b', label='Observed')
 plt.plot(predicted[:len(y_test)], 'g', label='Predicted')
 plt.plot(((y_test - predicted) ** 2), 'r', label='Root-mean-square deviation')
 plt.legend()
-plt.show()
+# plt.show()
+plt.savefig("lstmRnnGraph2.pdf")
+files.download("lstmRnnGraph2.pdf") 
 print('Training duration:{}'.format(time.time() - global_start_time))
