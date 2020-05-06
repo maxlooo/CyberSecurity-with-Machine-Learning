@@ -41,11 +41,10 @@ downloaded.GetContentFile('cpu-full-b.csv')
 # print('Downloaded content "{}"'.format(downloaded.GetContentString()))
 
 def normalize(result):
-	result_mean = result.mean()
 	result_std = result.std()
-	result -= result_mean
+	result -= result.mean()
 	result /= result_std
-	return result, result_mean
+	return result
 
 global_start_time = time.time()
 
@@ -65,7 +64,7 @@ result = []
 for index in range(train_start, train_end - sequence_length):
 	result.append(data[index: index + sequence_length])
 result = np.array(result)
-result, result_mean = normalize(result)
+result = normalize(result)
 
 print("Training data shape  : ", result.shape)
 
@@ -81,7 +80,7 @@ result = []
 for index in range(test_start, test_end - sequence_length):
 	result.append(data[index: index + sequence_length])
 result = np.array(result)
-result, result_mean = normalize(result)
+result = normalize(result)
 
 print("Test data shape  : {}".format(result.shape))
 
