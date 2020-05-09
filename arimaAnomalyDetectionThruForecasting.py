@@ -1,4 +1,4 @@
-# Using Google Colab for python and pyflux
+# Using Google Colab's Jupyter for python and pyflux
 # datasets can be obtained from 
 # https://github.com/oreilly-mlsec/book-resources/tree/master/chapter3/datasets/cpu-utilization
 import os
@@ -6,7 +6,7 @@ import numpy as np
 import pandas as pd
 import pyflux as pf
 from datetime import datetime
-from matplotlib.backends.backend_pdf import PdfPages
+# from matplotlib.backends.backend_pdf import PdfPages
 import matplotlib.pyplot as plt
 %matplotlib inline
 

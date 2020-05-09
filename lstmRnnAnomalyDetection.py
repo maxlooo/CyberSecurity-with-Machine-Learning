@@ -1,4 +1,6 @@
 # This python program is run from Google Colab with Jupyter
+# datasets can be obtained from 
+# https://github.com/oreilly-mlsec/book-resources/tree/master/chapter3/datasets/cpu-utilization
 import numpy as np
 import pandas as pd
 from datetime import datetime
