@@ -1,3 +1,5 @@
+# tested on Anaconda, jupyter notebook 6.0.3 
+# dataset from https://plg.uwaterloo.ca/~gvcormac/treccorpus07/
 import os
 import pickle
 import email_read_util
