@@ -42,10 +42,9 @@ def main():
     y_predict = classifier.predict(X_test)
 
     # Test the accuracy
-    print("\nAccuracy Score: {}".format(accuracy_score(y_predict, y_test)))
+    print("\nAccuracy Score: {}".format(accuracy_score(y_test, y_predict)))
     print("Confusion Matrix: \n{}".format(confusion_matrix(y_test, y_predict)))
     print("Classification report on your prediction \n{}".format(classification_report(y_test,y_predict)))
-
 
     # Predict based on new transaction
     print("Enter a new transaction with 5 feature values separated by commas")
