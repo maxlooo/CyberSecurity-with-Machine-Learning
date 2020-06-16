@@ -36,7 +36,7 @@ def main():
     # Fit training data to logistic regression classifier
     classifier = LogisticRegression()
     classifier.fit(X_train, y_train)
-    print("\nClassifier aftering being fitted: \n{}".format(classifier))
+    print("\nClassifier after being fitted: \n{}".format(classifier))
 
     # Predict y_test data
     y_predict = classifier.predict(X_test)
