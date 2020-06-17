@@ -17,9 +17,11 @@ def main():
     print("5 lines of data from PaymentData: \n{}".format(dataframe.sample(5)))
         
     # change payment method from categorical variable to numeric
-    dataframe.paymentMethod.replace(['paypal', 'creditcard', 'storecredit'], [0,1,2], inplace=True)
+    dataframe.paymentMethod.replace(['paypal', 'creditcard', 'storecredit'], [-1,0,1], inplace=True)
     print("\n5 lines of data after changing categorical variable to numeric: \n{}".format(dataframe.sample(5)))
-    
+    dataframe['paymentMethod']=dataframe.apply(lambda x: x['paymentMethod']+1, axis=1)
+    print("\n5 lines of data after applying lambda function to numeric categorical variable: \n{}".format(dataframe.sample(5)))
+
     # create the X axis
     X_axis = dataframe.drop('label', axis=1)
     
